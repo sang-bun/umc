@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.StoreHandler;
-import umc.spring.converter.MissionConvertor;
+import umc.spring.converter.MissionConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Store;
 import umc.spring.repository.MissionRepository;
@@ -26,7 +26,7 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 
         Store store = storeRepository.findById(request.getStoreId()).orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
-        Mission mission = MissionConvertor.toMission(request, store);
+        Mission mission = MissionConverter.toMission(request, store);
 
         return missionRepository.save(mission);
     }

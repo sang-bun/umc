@@ -15,11 +15,10 @@ public class ReviewResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateResultDTO {
-
+        private String nickname;
         private Long reviewId;
         private Float rating;
         private String comment;
         private LocalDateTime createdAt;
     }
-
 }

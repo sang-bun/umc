@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
+import umc.spring.domain.enums.Role;
 import umc.spring.domain.mapping.Reward;
 import umc.spring.domain.mapping.UserMission;
 import umc.spring.domain.mapping.UserPrefer;
@@ -19,8 +20,8 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
-@DynamicUpdate
-@DynamicInsert
+//@DynamicUpdate
+//@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class User extends BaseEntity {
@@ -29,10 +30,10 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(nullable = false, length = 40)
+    @Column(nullable = false)
     private String passwd;
 
-//    @Column(nullable = false, length = 40)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, length = 20)
@@ -55,6 +56,9 @@ public class User extends BaseEntity {
     private String specAddress;
 
     @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     private MemberStatus status;
 
@@ -74,6 +78,13 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Reward> rewardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+    public void encodePassword(String password){
+        this.passwd = password;
+    }
 
 }
 

@@ -19,26 +19,31 @@ public class UserConverter {
 
     public static User toUser(UserRequestDTO.JoinDto request) {
 
-        Gender gender = null;
-
-        switch (request.getGender()) {
-            case 1:
-                gender = Gender.MALE;
-                break;
-            case 2:
-                gender = Gender.FEMALE;
-                break;
-            case 3:
-                gender = Gender.NONE;
-                break;
-        }
-
         return User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .passwd(request.getPassword())
+                .gender(request.getGender())
                 .address(request.getAddress())
                 .specAddress(request.getSpecAddress())
-                .gender(gender)
-                .name(request.getName())
+                .role(request.getRole())
                 .userPreferList(new ArrayList<>())
                 .build();
     }
+
+    public static UserResponseDTO.LoginResultDTO toLoginResultDTO(Long memberId, String accessToken) {
+        return UserResponseDTO.LoginResultDTO.builder()
+                .memberId(memberId)
+                .accessToken(accessToken)
+                .build();
+    }
+
+    public static UserResponseDTO.MemberInfoDTO toMemberInfoDTO(User user){
+        return UserResponseDTO.MemberInfoDTO.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .gender(user.getGender().name())
+                .build();
+    }
+
 }

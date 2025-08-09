@@ -47,7 +47,11 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Integer> point = createNumber("point", Integer.class);
 
+    public final ListPath<Review, QReview> reviewList = this.<Review, QReview>createList("reviewList", Review.class, QReview.class, PathInits.DIRECT2);
+
     public final ListPath<umc.spring.domain.mapping.Reward, umc.spring.domain.mapping.QReward> rewardList = this.<umc.spring.domain.mapping.Reward, umc.spring.domain.mapping.QReward>createList("rewardList", umc.spring.domain.mapping.Reward.class, umc.spring.domain.mapping.QReward.class, PathInits.DIRECT2);
+
+    public final EnumPath<umc.spring.domain.enums.Role> role = createEnum("role", umc.spring.domain.enums.Role.class);
 
     public final StringPath specAddress = createString("specAddress");
 
