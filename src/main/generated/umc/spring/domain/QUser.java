@@ -49,6 +49,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final ListPath<umc.spring.domain.mapping.Reward, umc.spring.domain.mapping.QReward> rewardList = this.<umc.spring.domain.mapping.Reward, umc.spring.domain.mapping.QReward>createList("rewardList", umc.spring.domain.mapping.Reward.class, umc.spring.domain.mapping.QReward.class, PathInits.DIRECT2);
 
+    public final StringPath specAddress = createString("specAddress");
+
     public final EnumPath<umc.spring.domain.enums.MemberStatus> status = createEnum("status", umc.spring.domain.enums.MemberStatus.class);
 
     //inherited
